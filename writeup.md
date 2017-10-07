@@ -5,15 +5,15 @@ We train a deep neural network to identify and track a target in simulation. In 
 ## Technical Overview ##
 Given a camera image, our goal is to assign each pixel one of each label (none, person, hero). We use a data driven approach via deep learning. 
 
-** Architecture **
+**Architecture**
 The network is a simple encoder-decoder network commonly used for semantic segmentation. The encoder is a single layer convolution transforming out image from 3 dimensions (RGB) to 32 dimensions. These are then sent through a 1x1 convolution layer to retain spatial information (as opposed to flattening via a fully connected layer). For the decoder step, we apply a transposed convolution by upsampling. Next, we concatenate the convolutional layer combined with the original input as a way to short-circuit information via skip connections. Finally, the decoder applies additional convolutional layers.
 
-** NN Operators**
+**NN Operators**
 Batch normalization - normalizing layers of the neural net. Intuition is that given input normalization is valuable, we might also want to normalize information across NN layers. This generally avoids the need for dropout
 Skip Connections - combine data from different layers so as to combine information from multiple levels of granularity
 1x1 Convolution - Instead of a fully connected layer that aggregates all neurons into a single output array, we preserve the spatial context via 1x1 convolution but instead shrink down to smaller layers
 
-** Network Parameters **
+**Network Parameters**
 Generally, parameters were optimized via trial and error
 
 Epoch: needed enough iterations such that training accuracy improved alog with validation accuracy
